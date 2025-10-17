@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Arithma | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Team Arithma</h1>
+    <p>The innovators behind Math Quest</p>
+    <a href="https://yourmarketingwebsite.com" class="btn" target="_blank">Visit Our Main Website</a>
+  </header>
+
+  <!-- Mission & Vision Section -->
+  <section id="mission-vision">
+    <h2>Our Mission & Vision</h2>
+    <div class="mv-container">
+      <div class="mission">
+        <h3>Mission</h3>
+        <p>To make learning mathematics fun, interactive, and accessible for every student through technology and creativity.</p>
+      </div>
+      <div class="vision">
+        <h3>Vision</h3>
+        <p>To become the leading digital platform for math education in Sri Lanka and inspire a generation of confident problem-solvers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section id="achievements">
+    <h2>Our Achievements</h2>
+    <ul>
+      <li>🏆 Won “Best Innovative Solution” at IIT InfoSchol Demo Day 2025</li>
+      <li>📚 Reached over 2,000 students in pilot testing</li>
+      <li>🤝 Partnered with local schools to promote digital learning</li>
+    </ul>
+  </section>
+
+  <!-- Our Journey Section -->
+  <section id="journey">
+    <h2>Our Journey</h2>
+    <p>Our journey began with a shared passion for education and innovation. What started as a small university project evolved into Math Quest — a platform that transforms how students learn mathematics through gamified lessons, competitions, and progress tracking.</p>
+  </section>
+
+  <!-- Meet the Team Section -->
+  <section id="team">
+    <h2>Meet the Team</h2>
+    <div class="team-container">
+      <div class="member">
+        <img src="https://via.placeholder.com/150" alt="Kevi">
+        <h3>Kevi</h3>
+        <p>Lead Developer – Frontend, Backend, and UI/UX Design</p>
+      </div>
+
+      <div class="member">
+        <img src="https://via.placeholder.com/150" alt="Lisari">
+        <h3>Lisari</h3>
+        <p>UI/UX Designer and Full Stack Developer</p>
+      </div>
+
+      <div class="member">
+        <img src="https://via.placeholder.com/150" alt="Dilni">
+        <h3>Dilni</h3>
+        <p>Marketing and Product Management</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Got questions or want to collaborate? Reach out to us below!</p>
+
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Team Arithma</p>
+    <button id="clickMe">Say Hello 👋</button>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
