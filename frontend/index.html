@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Quest</title>
+  <!--
+    Math Quest – a gamified productivity dashboard and mini‑game site.
+    This page stitches together many features described in the project brief:
+    a top players marquee, a bento dashboard with live counters, a hero
+    section, parallax scene cards, a cinematic slideshow, a quest board,
+    mini‑game, achievements grid, leaderboard, shop and a home builder.
+    Everything runs client‑side and persists state via LocalStorage.
+  -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="crest" aria-hidden="true">🧮</span>
+      <h1>Math&nbsp;Quest</h1>
+    </div>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <button id="themeToggle" class="icon-button" aria-label="Toggle theme">🌗</button>
+      <button id="soundToggle" class="icon-button" aria-label="Toggle sound">🔊</button>
+      <div id="profileChip" class="profile-chip" title="Player stats">
+        <span id="profileAvatar" class="avatar" aria-hidden="true">🙂</span>
+        <span class="stats">
+          <span id="profileLevel">Lv&nbsp;1</span>
+          <span id="profileXP">0&nbsp;XP</span>
+          <span id="profileCoins">0&nbsp;💰</span>
+        </span>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <!-- Topboard: scrolling ribbon and bento dashboard -->
+    <section id="topboard" class="topboard">
+      <div class="top-players-glass glass-panel">
+        <div class="ribbon-title">Top Players</div>
+        <div class="r-chips-viewport">
+          <div id="topPlayersTrack" class="chip-track"></div>
+        </div>
+      </div>
+      <div class="bento-grid">
+        <div class="bento bento-level" id="bentoLevel">
+          <div class="ring-wrapper">
+            <svg viewBox="0 0 100 100" class="progress-ring" aria-hidden="true">
+              <circle class="ring-bg" cx="50" cy="50" r="45" />
+              <circle class="ring-progress" cx="50" cy="50" r="45" />
+            </svg>
+            <div class="ring-label">
+              <span id="levelNumber">1</span>
+              <small>Level</small>
+            </div>
+          </div>
+          <p class="bento-footer" id="levelFooter">Next at 100 XP</p>
+        </div>
+        <div class="bento" id="bentoPoints">
+          <h3>Points</h3>
+          <p class="big-number" id="pointsTotal">0</p>
+        </div>
+        <div class="bento" id="bentoStreak">
+          <h3>Day Streak</h3>
+          <p class="big-number" id="streakCount">1 🔥</p>
+        </div>
+        <div class="bento" id="bentoRank">
+          <h3>Rank</h3>
+          <p class="big-number" id="rankIndex">#1</p>
+        </div>
+        <div class="bento" id="bentoQuiz">
+          <h3>Daily Quiz</h3>
+          <button class="primary-btn" id="startQuizBtn">Take Quiz</button>
+        </div>
+        <div class="bento" id="bentoBuilder">
+          <h3>Make Your Home</h3>
+          <button class="primary-btn" id="openBuilderBtn">Open Builder</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <h2 class="hero-headline"><span class="glitch" data-text="Embark on a Quest!">Embark on a Quest!</span></h2>
+        <p class="hero-tagline">
+          Level up your mind with daily challenges, quests and games. Earn XP,
+          collect coins and build your dream home!
+        </p>
+        <div class="hero-actions">
+          <button class="primary-btn" id="startQuestingBtn">Start Questing</button>
+          <button class="secondary-btn" id="howToPlayBtn">How to play</button>
+        </div>
+        <div class="hero-xp-bar">
+          <div class="xp-label">XP</div>
+          <div class="xp-bar-track">
+            <div class="xp-bar-fill" id="heroXPBar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <!-- Floating orbs decorative -->
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+      </div>
+    </section>
+
+    <!-- Scenes Section: Parallax cards and slideshow -->
+    <section id="scenes" class="scenes-section">
+      <h2>Discover Scenes</h2>
+      <div class="parallax-grid">
+        <div class="scene-card" data-index="0">
+          <div class="layer back" style="background-image: url('assets/house.jpg');"></div>
+          <div class="layer mid" style="background-image: url('assets/urus.jpg');"></div>
+          <div class="layer front"></div>
+          <div class="card-title">Dubai • Lamborghini Urus</div>
+        </div>
+        <div class="scene-card" data-index="1">
+          <div class="layer back" style="background-image: url('assets/house.jpg');"></div>
+          <div class="layer mid" style="background-image: url('assets/ferrari.jpg');"></div>
+          <div class="layer front"></div>
+          <div class="card-title">Los&nbsp;Angeles • Ferrari 488</div>
+        </div>
+        <div class="scene-card" data-index="2">
+          <div class="layer back" style="background-image: url('assets/house.jpg');"></div>
+          <div class="layer mid" style="background-image: url('assets/porsche.jpg');"></div>
+          <div class="layer front"></div>
+          <div class="card-title">Singapore • Porsche 911</div>
+        </div>
+      </div>
+      <div class="slideshow-wrapper">
+        <div class="slideshow" id="slideshow">
+          <!-- Slides inserted via JS -->
+        </div>
+        <div class="slideshow-caption" id="slideCaption" aria-live="polite"></div>
+        <div class="slideshow-controls">
+          <button id="prevSlideBtn" aria-label="Previous slide">←</button>
+          <button id="nextSlideBtn" aria-label="Next slide">→</button>
+        </div>
+        <button id="buildSceneBtn" class="secondary-btn">Build this scene</button>
+      </div>
+    </section>
+
+    <!-- Quest Board -->
+    <section id="quests" class="quests-section">
+      <h2>Quest Board</h2>
+      <div class="quest-controls">
+        <input type="text" id="questSearch" placeholder="Search quests..." />
+        <select id="questFilter">
+          <option value="all">All</option>
+          <option value="easy">Easy</option>
+          <option value="daily">Daily</option>
+          <option value="skill">Skill</option>
+          <option value="challenge">Challenge</option>
+          <option value="boss">Boss</option>
+        </select>
+      </div>
+      <div class="quest-list" id="questList"></div>
+      <div class="quest-pagination" id="questPagination"></div>
+    </section>
+
+    <!-- Mini‑Game -->
+    <section id="miniGame" class="mini-game-section">
+      <h2>Mini‑Game: Orb Catcher</h2>
+      <div class="game-info">
+        <span>Score: <strong id="gameScore">0</strong></span>
+        <span>Time: <strong id="gameTime">30</strong>s</span>
+        <span>Best: <strong id="bestScore">0</strong></span>
+      </div>
+      <div class="game-area" id="gameArea" aria-label="Orb catcher playfield"></div>
+      <button class="primary-btn" id="startGameBtn">Start Game</button>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="achievements-section">
+      <h2>Achievements</h2>
+      <div class="achievements-grid" id="achievementsGrid"></div>
+    </section>
+
+    <!-- Leaderboard -->
+    <section id="leaderboard" class="leaderboard-section">
+      <h2>Leaderboard</h2>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Player</th><th>Lvl</th><th>XP</th></tr>
+        </thead>
+        <tbody id="leaderboardBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Shop -->
+    <section id="shop" class="shop-section">
+      <h2>Shop</h2>
+      <div class="shop-grid" id="shopGrid"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about-section">
+      <h2>About Math Quest</h2>
+      <p>
+        Math Quest is a gamified learning and productivity experience. It blends a
+        flexible dashboard with interactive mini‑games, quests, a daily quiz
+        system and a light home builder. Everything runs client side—no server
+        required—and your progress is saved locally. Have fun and challenge
+        yourself!
+      </p>
+    </section>
+  </main>
+
+  <!-- Dialogs / Modals -->
+  <div id="overlay" class="overlay hidden" role="presentation"></div>
+  <dialog id="quizDialog" class="modal" aria-labelledby="quizTitle">
+    <h3 id="quizTitle">Daily Quiz</h3>
+    <div id="quizQuestion"></div>
+    <div id="quizOptions" class="quiz-options"></div>
+    <button id="closeQuizBtn" class="secondary-btn">Cancel</button>
+  </dialog>
+  <dialog id="builderDialog" class="modal" aria-labelledby="builderTitle">
+    <h3 id="builderTitle">Home Builder</h3>
+    <div class="builder-preview">
+      <img id="builderHouse" src="assets/house.jpg" alt="Modern house" />
+      <img id="builderCar" src="assets/urus.jpg" alt="Car" />
+    </div>
+    <div class="builder-controls">
+      <button id="randomizeSceneBtn" class="secondary-btn">Randomize</button>
+      <button id="saveSceneBtn" class="primary-btn">Save Scene (+30 XP)</button>
+    </div>
+    <button id="closeBuilderBtn" class="secondary-btn">Close</button>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
